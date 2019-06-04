@@ -5,22 +5,24 @@
  */
 package Servlet;
 
-import Dao.PecaDao;
-import Pojo.PecaPojo;
+import Dao.UsuarioDao;
+import Pojo.UsuarioPojo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author rande
  */
-public class CadastroPeca extends HttpServlet {
-    PecaDao pecaDao = new PecaDao();
-    PecaPojo pecaPojo = new PecaPojo();
+public class LoginServlet extends HttpServlet {
+    UsuarioDao usuarioDao = new UsuarioDao();
+    UsuarioPojo usuarioPojo = new UsuarioPojo();    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,25 +34,19 @@ public class CadastroPeca extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");              
         
-        pecaPojo.setNome(request.getParameter("nome"));
-        pecaPojo.setUnidade(Integer.parseInt(request.getParameter("unidade")));
-        pecaPojo.setPreco(Double.parseDouble(request.getParameter("preco")));
-                
-        pecaDao.salvar(pecaPojo);
+        usuarioPojo.setU_LOGIN(request.getParameter("login"));
+        usuarioPojo.setU_SENHA(request.getParameter("senha"));
+           
+        boolean login = usuarioDao.login(usuarioPojo);
         
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CadastroPeca</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CadastroPeca at " + request.getContextPath() + "</h1>");        
-            out.println("</body>");
-            out.println("</html>");
+        if(login){
+            
+            HttpSession session = request.getSession(true);            
+            session.setAttribute("usuario", usuarioPojo.getU_LOGIN());                                  
+            response.sendRedirect("home.jsp");
+        }else{
+             response.sendRedirect("index.html");
         }
     }
 

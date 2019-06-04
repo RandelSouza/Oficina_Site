@@ -1,40 +1,40 @@
 package Pojo;
 
 public class PecaPojo {
-    private int pid;
-    private String nome;
-    private int unidade;
-    private double preco;
+    private int P_ID;
+    private String P_NOME;
+    private int P_UNIDADE;
+    private double P_PRECO;
     
-    public int getPid() {
-        return pid;
+    public int getP_ID() {
+        return P_ID;
     }
 
-    public void setPid(int pid) {
-        this.pid = pid;
+    public void setP_ID(int P_ID) {
+        this.P_ID = P_ID;
     }
 
-    public String getNome() {
-        return nome;
+    public String getP_NOME() {
+        return P_NOME;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setP_NOME(String P_NOME) {
+        this.P_NOME = P_NOME;
     }
 
-    public int getUnidade() {
-        return unidade;
+    public int getP_UNIDADE() {
+        return P_UNIDADE;
     }
 
-    public void setUnidade(int unidade) {
-        this.unidade = unidade;
+    public void setP_UNIDADE(int P_UNIDADE) {
+        this.P_UNIDADE = P_UNIDADE;
     }
 
-    public double getPreco() {
-        return preco;
+    public double getP_PRECO() {
+        return P_PRECO;
     }
 
-    public void setPreco(double preco) {
-        this.preco = preco;
+    public void setP_PRECO(double P_PRECO) {
+        this.P_PRECO = P_PRECO;
     }   
 }
